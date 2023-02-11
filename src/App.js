@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+
+//style
+import styles from './component/Style.module.css'
+
+//component
+import MakeNote from './component/MakeNote'
 
 function App() {
+
+  const [search, setSearch] = useState('')
+  const [toggle , setToggle] = useState(false)
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div className={styles.body} style={{backgroundColor : toggle ? 'black' : 'white'}}>
+      <div className={styles.titleContainer}>
+        <h1 style={{color : toggle ? 'white' : 'black'}}>Notes</h1>
+        <button className={styles.button} onClick={()=>setToggle(!toggle)}>Toggle Mode</button>
+      </div>
+     <div className={styles.inputContainer}>
+     <i className='fa fa-search'></i>
+      <input
+        type="text"
+        value={search}
+        onChange={(event) => setSearch(event.target.value)}
+        className={styles.input}
+        placeholder="Search ..."
+      />
+     </div>
+    <MakeNote search={search}/>    
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
